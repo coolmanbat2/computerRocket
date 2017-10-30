@@ -5,8 +5,7 @@ at the langauge by a certain amount of time.
 
 You will see as time progresses, the programs that I create will become more sophiscated/complex in algorithmetic behaviour. During this time, I will make the attempt of improving my documentation and efficency in my code. 
 
-Here is a project that I had participated in: 
-https://github.com/prasvpatel/Spot_Bot
+_[Here is a project that I had participated in](https://github.com/prasvpatel/Spot_Bot)_
 
 ### thank you for reading and I hope you enjoy my programs as much as I do.
 
@@ -15,4 +14,4 @@ https://github.com/prasvpatel/Spot_Bot
 
   _Type in Arrays.toString(arrayType);_
   
-  _Source: https://stackoverflow.com/questions/409784/whats-the-simplest-way-to-print-a-java-array_
+  _[Source](https://stackoverflow.com/questions/409784/whats-the-simplest-way-to-print-a-java-array)_
