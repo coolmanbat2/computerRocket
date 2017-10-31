@@ -1,4 +1,4 @@
-package playground;
+package moreDefaults;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -58,6 +58,9 @@ public class MatrixPractice {
 		int elementToFind = '3';
 		// Algorithm 1 in action:
 		ArrayList<int[]> myLoc = searchAll(matrix, elementToFind);
+		Object[] locs = myLoc.toArray();
+		// Apparently this depicts the deeper side of elements in a string. 
+		System.out.println(Arrays.deepToString(locs));
 		
 		//Algorithm 2 in action:
 	}
