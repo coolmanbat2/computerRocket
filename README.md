@@ -14,4 +14,6 @@ _[Here is a project that I had participated in](https://github.com/prasvpatel/Sp
 
   _Type in Arrays.toString(arrayType);_
   
+  _There is also: Arrays.deepToString(arrayType) -> for the cases in which the contents are deeper in the memory._
+  
   _[Source](https://stackoverflow.com/questions/409784/whats-the-simplest-way-to-print-a-java-array)_
