@@ -21,3 +21,6 @@ _[Here is a project that I had participated in](https://github.com/prasvpatel/Sp
 - _Whenever you're handling a difficult problem, complete the solution using your best brute-force algorithm.. then learning ways to improve that solution by checking other solutions posted by people on github <3_
 
   _[Source](https://stackoverflow.com/questions/418465/is-a-preference-for-brute-force-solutions-a-bad-sign)_
+  
+- _Something really useful I just learned: Hashing. It's essentially a faster way to search through an array of information.
+The catch here is that its Big-O Algorithm is O(1) and not the typical O(log n) (of a normal binary search). More info can be found [here] (https://www.cs.cmu.edu/~adamchik/15-121/lectures/Hashing/hashing.html)_
