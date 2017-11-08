@@ -24,3 +24,11 @@ _[Here is a project that I had participated in](https://github.com/prasvpatel/Sp
   
 - _Something really useful I just learned: Hashing. It's essentially a faster way to search through an array of information.
 The catch here is that its Big-O Algorithm is O(1) and not the typical O(log n) (of a normal binary search). More info can be found [here.](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Hashing/hashing.html)_
+
+- _This is truly an exciting day for me because, I had just learned this:_
+  ```
+  Scanner get = new Scanner(System.in);
+  get.hasNext() // This is adding/checking elements into any type of ADT (Abstract Data Type).
+  get.next() // Spits out the elements that are in the ADT. (removal)
+  ```
+  _[What is an Abstract Data Type?](https://stackoverflow.com/questions/10267084/what-is-adt-abstract-data-type)_
