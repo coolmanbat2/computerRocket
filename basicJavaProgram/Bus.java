@@ -38,6 +38,8 @@ public class Bus {
 			// Each integer placed into the array is considered a test case.
 			testCases.add(get.nextDouble());
 		}
+		// close the input
+		get.close();
 	}
 	
 	/**
