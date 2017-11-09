@@ -1,50 +1,80 @@
-package playground;
+package kattisProjects;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bus {
-
+	// Setup of input.
+	private static Scanner get = new Scanner(System.in);
+	// Setup for amount of test cases that will exist.
+	private static ArrayList<Double> testCases = new ArrayList<Double>();
 	
 	/**
-	 * The main purpose of this program is to obtain the initial number of passengers
-	 * that are in the bus given the number of test cases and for each test case; the 
-	 * number of bus stops.
-	 * 
-	 * @param args
+	 * Purpose: To sum up all integers using the formula 1/(2^n), and up to the specified "stopAt" 
+	 * amount.  
+	 * @author ProgrammerA
 	 */
-	public static void main(String[] args) {
-		// Setup input
-		Scanner get = new Scanner(System.in);
-		// Number of test cases
-		int testCases = get.nextInt();
-		// Remember the bus stops for each test case.
-		int[] stopPerCase = new int[testCases];
-		// Setup for retrieving the number of passengers in each test case. 
-		double[] origPass = new double[testCases];
-		for (int testCaseCounter = 0; testCaseCounter < testCases; testCaseCounter++) {
-			// Last number of passengers for each test case.
-			double numOfPass = 0;
-			// Retrieve the number of bus stops for each test case. 
-			stopPerCase[testCaseCounter] = get.nextInt();
-			// Algorithm.. (yet to figure out :-()
-			/*
-			 * Possible solution? Use the equation for retrieving the number of left over passengers..
-			 * Reverse that, then loop it through the number of bus stops that exist. 
-			 */
-			for (int busStops = 0; busStops < stopPerCase[testCaseCounter]; busStops++) {
-				// equation
-				origPass[testCaseCounter] = 2 * (numOfPass + 0.5);
-				numOfPass = origPass[testCaseCounter];
-			}
-			// By this point.. the numbers should've been initialized in memory.. if not.. fuck java.
-			// answer: it didn't initialize.. why. because.. i assumed a computer is smart. IT'S DUMB DOESN'T KNOW ANYTHING!
-			// DO NOT ASSUME. STAY IN PRMITIVE STATE. 
+	private static double sum(double stopAt) {
+		double result = 0;
+		// If stopAt is 0, then
+		if (stopAt == 1) {
+			// it's sum will be 1.
+			result = 1/(Math.pow(2, 1));
+		} else {
+			result = 1/(Math.pow(2, stopAt)) + sum(stopAt-1);
 		}
-		// output
-		for (int i = 0; i < testCases; i++) {
-			System.out.println((int)origPass[i]);
+		return result;
+	}
+	/**
+	 * Purpose: To retrieve the information of, the number of test cases, 
+	 * and the number of bus stops based on each test case.
+	 * @author ProgrammerA
+	 */
+	private static void input() {
+		// Number of test cases that exist in the program.
+		int numOfTestCases = get.nextInt();
+		// Every input given will be considered a test case.
+		for (int testCaseCounter = 0; testCaseCounter < numOfTestCases; testCaseCounter++) {
+			// Each integer placed into the array is considered a test case.
+			testCases.add(get.nextDouble());
 		}
 	}
-// Some good tips for yourself: programming is like writing an essay or reading response.. you gotta plan it out first and then create the action.. itll help in the long run. 
-// BTW; The big-o efficiency in this? O(n^2).. (worst case) I want to improve it..). Part of computer science revisions training.
+	
+	/**
+	 * Purpose: To calculate the initial number of passengers based on
+	 * each test case.
+	 * @author ProgrammerA
+	 */
+	private static void calculateInitialPassengers() {
+		// For every test case that exists in the array,
+		for (int counter = 0; counter < testCases.size(); counter++) {
+			// Solve for the number of bus stops (based on each test case)
+			// and replace it with the initial number of passengers.
+			double busStop = testCases.remove(0);
+			// Using the formula to solve for the test case.
+			testCases.add((sum(busStop))*Math.pow(2, busStop));
+		}
+	}
+	
+	/**
+	 * Purpose: To print out the results based off of the calculations completed. 
+	 * @author ProgrammerA
+	 */
+	private static void results() {
+		// Print out the results now.
+		for (int printing = 0; printing < testCases.size(); printing++) {
+			int initPass = testCases.get(printing).intValue();
+			System.out.println(initPass);
+		}
+	}
+	
+	public static void main(String[] args) {
+		// Asks for number of test cases and for each test case based on the number of test cases.
+		input();
+		// Calculates each test case to find original number 
+		// of passengers using the formula (n = (positive sum of 1/2^x)*2^x)
+		calculateInitialPassengers();
+		// Print the output from the usage of that formula.
+		results();
+	}
 }
