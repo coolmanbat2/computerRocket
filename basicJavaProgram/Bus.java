@@ -16,11 +16,12 @@ public class Bus {
 	 */
 	private static double sum(double stopAt) {
 		double result = 0;
-		// If stopAt is 0, then
+		// If stopAt is 1, then
 		if (stopAt == 1) {
-			// it's sum will be 1.
+			// it's sum will be 1/2.
 			result = 1/(Math.pow(2, 1));
 		} else {
+			// Otherwise, its the previous sum + the value that is resolved from the formula 1/(2^n)
 			result = 1/(Math.pow(2, stopAt)) + sum(stopAt-1);
 		}
 		return result;
