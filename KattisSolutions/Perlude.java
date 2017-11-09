@@ -56,5 +56,7 @@ public class Perlude {
 			//  Count the next case
 			caseCounter++;
 		}
+		// Close the input
+		get.close();
 	}
 }
