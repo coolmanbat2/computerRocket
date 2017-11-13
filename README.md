@@ -9,7 +9,7 @@ _[Here is a project that I had participated in](https://github.com/prasvpatel/Sp
 
 ### thank you for reading and I hope you enjoy my programs as much as I do.
 
-### Notes for improvement for myself:
+### Log of new concepts that I have learned today:
 - _Java does not allow you to print data of string so easily.. it requires extra steps. Here are the steps:_
 
   _Type in Arrays.toString(arrayType);_
