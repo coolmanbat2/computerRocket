@@ -1,14 +1,19 @@
+/*
+ * Note this program is still in development.
+ * Date: October 1st, 2018
+ */
+
+
 package window;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
@@ -27,11 +32,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class AimBot {
-
+	
+	// public private window stuff.
 	private JPanel panel = new JPanel(new GridBagLayout());
 	private GridBagConstraints constraints = new GridBagConstraints();
-	private JButton butt = new JButton("Start");
-
+	
+	// Actual buttons
+	private JButton startButt = new JButton("Start");
+	private JButton quitButt = new JButton("Quit");
+	
+	// labeling stuff: 
+	private JLabel informUser = new JLabel("Half Life AimBot: Press start to get started.");
 	/*=================================== FRONT-END STUFF ====================================== */	
 
 	/**
@@ -39,21 +50,41 @@ public class AimBot {
 	 */
 	private void initialize(int width, int height) {
 
-		// button stuff :-)
-		butt.addActionListener(trigger());
-		butt.setPreferredSize(new Dimension(200, 100));
-		butt.setMnemonic(KeyEvent.VK_ENTER);
-		butt.setLocation(0, 0);
+		// start button stuff :--)
+		startButt.addActionListener(trigger());
+		startButt.setPreferredSize(new Dimension(200, 100));
+		startButt.setMnemonic(KeyEvent.VK_ENTER);
+		startButt.setLocation(0, 0);
 		constraints.fill = GridBagConstraints.HORIZONTAL;
-		constraints.gridx = 1;
+		constraints.gridx = 0;
 		constraints.gridy = 1;
+		panel.add(startButt, constraints);
 		
+		// Label that gives the space in between the two buttons. 
+		Font font = new Font("serif", 15, 25);
+		informUser.setFont(font);
+		// Constraints to locate the component.
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.insets = new Insets(-10, 0,0,0);
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		panel.add(informUser, constraints);
+		
+		// quit button stuff :----)
+		//quitButt.addActionListener(trigger());
+		quitButt.setPreferredSize(new Dimension(200, 100));
+		quitButt.setMnemonic(KeyEvent.VK_ENTER);
+		quitButt.setLocation(0, 0);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.gridx = 2;
+		constraints.gridy = 1;
+		panel.add(quitButt, constraints);
 		
 		// Window stuff.
 		// Window setup stuff.
 		JFrame main = new JFrame("Test");
-		main.setBounds(100, 100, width, height);
-		panel.add(butt, constraints);
+		main.setSize(width, height);
+		//main.setBounds(100, 100, width, height);
 		main.add(panel);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.setLocationRelativeTo(null);
@@ -91,6 +122,23 @@ public class AimBot {
 				}		
 			}
 		};
+	}
+	
+	/**
+	 * Program is safely shut down here.
+	 * @return
+	 */
+	private ActionListener isQuit() {
+		return new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+			
+		};
+		
 	}
 	
 	/**
@@ -145,14 +193,14 @@ public class AimBot {
 		// otherwise, tell the user to run the game.
 		} else {
 			Font font = new Font("serif", 15, 25);
-			JLabel informUser = new JLabel("Please run the fucking game, Thanks!");
+			informUser.setText("Please run the fucking game, Thanks!");
 			informUser.setFont(font);
 			// Constraints to locate the component.
 			constraints.fill = GridBagConstraints.HORIZONTAL;
+			constraints.insets = new Insets(-10, 0,0,0);
 			constraints.gridx = 1;
 			constraints.gridy = 0;
 			
-			panel.add(informUser, constraints);
 			panel.validate();
 		}
 		
