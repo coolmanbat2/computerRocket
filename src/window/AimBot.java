@@ -1,6 +1,8 @@
 /*
  * Note this program is still in development.
  * Date: October 1st, 2018
+ * NOTE: If you forget how to push and commit files into git for another branch
+ * refer to the Chrome bookmark you made at this date. :---------).
  */
 
 
@@ -43,6 +45,9 @@ public class AimBot {
 	
 	// labeling stuff: 
 	private JLabel informUser = new JLabel("Half Life AimBot: Press start to get started.");
+	
+	// boolean for quitting loop; 
+	private boolean theQuitter = false;
 	/*=================================== FRONT-END STUFF ====================================== */	
 
 	/**
@@ -71,7 +76,7 @@ public class AimBot {
 		panel.add(informUser, constraints);
 		
 		// quit button stuff :----)
-		//quitButt.addActionListener(trigger());
+		quitButt.addActionListener(quit());
 		quitButt.setPreferredSize(new Dimension(200, 100));
 		quitButt.setMnemonic(KeyEvent.VK_ENTER);
 		quitButt.setLocation(0, 0);
@@ -117,7 +122,7 @@ public class AimBot {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					aimBot();
-				} catch (AWTException | IOException e) {
+				} catch (IOException e) {
 					e.printStackTrace();
 				}		
 			}
@@ -128,13 +133,12 @@ public class AimBot {
 	 * Program is safely shut down here.
 	 * @return
 	 */
-	private ActionListener isQuit() {
+	private ActionListener quit() {
 		return new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				theQuitter = true;
 			}
 			
 		};
@@ -171,40 +175,60 @@ public class AimBot {
 	 * @throws AWTException 
 	 * @throws IOException 
 	 */
-	private void aimBot() throws AWTException, IOException {
+	private void aimBot() throws IOException {
 		// Assuming the game is running Full Screen.
 		
 		
 		// First get the game screen.
-		// PROGRAM WILL NOT RETURN TRUE :(
 		AimBot fcnCall = new AimBot();
 		boolean gameRunning = fcnCall.isGame();
-		// If the game is running then, 
-		if (gameRunning) {
-			// start the "aimbot"
-			Robot mouse = new Robot();
-			BufferedImage gameScreen = mouse.createScreenCapture(new Rectangle(0, 0, 1920, 1080));
-			Graphics2D graphics = gameScreen.createGraphics();
-			// Once game screen is obtained
-			// Figure out which parts are heads or not.
-			// DO THE SCREEN CAPTURE OF JUST ONE APPLICATION.
-			File finalOut = new File("gameScreen.png");
-			ImageIO.write(gameScreen, "png", finalOut);
-		// otherwise, tell the user to run the game.
-		} else {
-			Font font = new Font("serif", 15, 25);
-			informUser.setText("Please run the fucking game, Thanks!");
-			informUser.setFont(font);
-			// Constraints to locate the component.
-			constraints.fill = GridBagConstraints.HORIZONTAL;
-			constraints.insets = new Insets(-10, 0,0,0);
-			constraints.gridx = 1;
-			constraints.gridy = 0;
-			
-			panel.validate();
-		}
 		
-
+		// In order for this progarm to continue (while also having buttons work);
+		// a Thread is required.
+		// Current problem with Thread: program still runs indefinitely.. Solution: Research more on Threads. 
+		Thread aimBotAction = new Thread() {
+			@Override
+			public void run() {
+				while (!theQuitter) {
+					// If the game is running then, 
+					if (gameRunning) {
+						// start the "aimbot"
+						Robot mouse;
+						System.out.println("testing");
+						try {
+							mouse = new Robot();
+							BufferedImage gameScreen = mouse.createScreenCapture(new Rectangle(0, 0, 1920, 1080));
+							Graphics2D graphics = gameScreen.createGraphics();
+							// Once game screen is obtained
+							// Figure out which parts are heads or not.
+							// DO THE SCREEN CAPTURE OF JUST ONE APPLICATION.
+							File finalOut = new File("gameScreen.png");
+							try {
+								ImageIO.write(gameScreen, "png", finalOut);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} catch (AWTException e1) {
+							e1.printStackTrace();
+						}
+					// otherwise, tell the user to run the game.
+					} else {
+						Font font = new Font("serif", 15, 25);
+						informUser.setText("Please run the fucking game, Thanks!");
+						informUser.setFont(font);
+						// Constraints to locate the component.
+						constraints.fill = GridBagConstraints.HORIZONTAL;
+						constraints.insets = new Insets(-10, 0,0,0);
+						constraints.gridx = 1;
+						constraints.gridy = 0;
+						
+						panel.validate();
+					}
+				}
+			}
+		};
+		aimBotAction.run();
 		// Once figured out.. aim the mouse right at their head and shoots :---).
 	}
 
