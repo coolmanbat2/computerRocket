@@ -1,4 +1,4 @@
-# Aim Bot Program <subsidary of computerRocket>
+# Aim Bot Program _subsidary of computerRocket_
 The main purpose of this program is to use allow users to automatically get headshots on other "Players" within any First-Person shooter (FPS).
 
 Notes to keep in mind: 
