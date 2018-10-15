@@ -89,7 +89,6 @@ public class AimBot {
 		// Window setup stuff.
 		JFrame main = new JFrame("Test");
 		main.setSize(width, height);
-		//main.setBounds(100, 100, width, height);
 		main.add(panel);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.setLocationRelativeTo(null);
@@ -112,7 +111,8 @@ public class AimBot {
 	/* ================================================== BACK-END INFORMATION ====================================================== */
 	
 	/**
-	 * ActionListener for a button when pressed, it will start
+	 * "Start" button ActionListener for a 
+	 * button when pressed, it will start
 	 * the program for aim botting :-)
 	 * @return
 	 */
@@ -138,7 +138,7 @@ public class AimBot {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				theQuitter = true;
+				System.exit(0);
 			}
 			
 		};
@@ -183,52 +183,47 @@ public class AimBot {
 		AimBot fcnCall = new AimBot();
 		boolean gameRunning = fcnCall.isGame();
 		
-		// In order for this progarm to continue (while also having buttons work);
+		// In order for this program to continue (while also having buttons work);
 		// a Thread is required.
 		// Current problem with Thread: program still runs indefinitely.. Solution: Research more on Threads. 
-		Thread aimBotAction = new Thread() {
-			@Override
-			public void run() {
-				while (!theQuitter) {
-					// If the game is running then, 
-					if (gameRunning) {
-						// start the "aimbot"
-						Robot mouse;
-						System.out.println("testing");
-						try {
-							mouse = new Robot();
-							BufferedImage gameScreen = mouse.createScreenCapture(new Rectangle(0, 0, 1920, 1080));
-							Graphics2D graphics = gameScreen.createGraphics();
-							// Once game screen is obtained
-							// Figure out which parts are heads or not.
-							// DO THE SCREEN CAPTURE OF JUST ONE APPLICATION.
-							File finalOut = new File("gameScreen.png");
-							try {
-								ImageIO.write(gameScreen, "png", finalOut);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						} catch (AWTException e1) {
-							e1.printStackTrace();
-						}
-					// otherwise, tell the user to run the game.
-					} else {
-						Font font = new Font("serif", 15, 25);
-						informUser.setText("Please run the fucking game, Thanks!");
-						informUser.setFont(font);
-						// Constraints to locate the component.
-						constraints.fill = GridBagConstraints.HORIZONTAL;
-						constraints.insets = new Insets(-10, 0,0,0);
-						constraints.gridx = 1;
-						constraints.gridy = 0;
-						
-						panel.validate();
+		while (!theQuitter) {
+			// If the game is running then, 
+			if (gameRunning) {
+				// start the "aimbot"
+				Robot mouse;
+				System.out.println("testing");
+				try {
+					mouse = new Robot();
+					BufferedImage gameScreen = mouse.createScreenCapture(new Rectangle(0, 0, 1920, 1080));
+					Graphics2D graphics = gameScreen.createGraphics();
+					// Once game screen is obtained
+					// Figure out which parts are heads or not.
+					// DO THE SCREEN CAPTURE OF JUST ONE APPLICATION.
+					File finalOut = new File("gameScreen.png");
+					try {
+						ImageIO.write(gameScreen, "png", finalOut);
+						theQuitter = true;
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
+				} catch (AWTException e1) {
+					e1.printStackTrace();
 				}
+			// otherwise, tell the user to run the game.
+			} else {
+				Font font = new Font("serif", 15, 25);
+				informUser.setText("Please run the fucking game, Thanks!");
+				informUser.setFont(font);
+				// Constraints to locate the component.
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				constraints.insets = new Insets(-10, 0,0,0);
+				constraints.gridx = 1;
+				constraints.gridy = 0;
+				theQuitter = true;
+				panel.validate();
 			}
-		};
-		aimBotAction.run();
+		}
+
 		// Once figured out.. aim the mouse right at their head and shoots :---).
 	}
 
